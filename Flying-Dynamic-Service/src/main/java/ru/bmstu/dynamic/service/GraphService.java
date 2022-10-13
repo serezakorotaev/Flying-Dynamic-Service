@@ -30,10 +30,10 @@ public class GraphService {
         drawGraphVelocityOfSound();
     }
 
-    public void baseDraw(XYSeries series , String title) {
+    public void baseDraw(XYSeries series , String title, String yValue) {
         XYDataset xyDataset = new XYSeriesCollection(series);
         JFreeChart chart = ChartFactory
-                .createXYLineChart(title , "x" , "y" ,
+                .createXYLineChart(title , "H, м" , yValue ,
                         xyDataset ,
                         PlotOrientation.VERTICAL ,
                         true , true , true);
@@ -55,7 +55,7 @@ public class GraphService {
                                     dynamicService.getGeopotencialHigh(i)))).round(new MathContext(5))
             );
         }
-        baseDraw(series, "VelocityOfSound");
+        baseDraw(series, "VelocityOfSound", "a, м/с");
     }
 
 
@@ -64,7 +64,7 @@ public class GraphService {
         for (double i = -2000; i <= 80000; i += 500) {
             series.add(i , dynamicService.getDensity(i));
         }
-        baseDraw(series , "Density");
+        baseDraw(series , "Density", "p, кг/м^3");
     }
 
     private void drawGraphPressure() {
@@ -79,7 +79,7 @@ public class GraphService {
                     )
             );
         }
-        baseDraw(series , "Pressure");
+        baseDraw(series , "Pressure", "P, Па");
     }
 
     private void drawGraphAccelerationOfGravityOnHigh() {
@@ -91,7 +91,7 @@ public class GraphService {
                     )
             );
         }
-        baseDraw(series , "AccelerationOfGravityOnHigh");
+        baseDraw(series , "AccelerationOfGravityOnHigh", "g, м,с^2");
     }
 
     public void drawGraphTemperature() {
@@ -103,6 +103,6 @@ public class GraphService {
                     )
             );
         }
-        baseDraw(series , "Temperature");
+        baseDraw(series , "Temperature", "T, K");
     }
 }
